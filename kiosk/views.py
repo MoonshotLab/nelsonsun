@@ -30,7 +30,8 @@ def upload(request):
                 energy=energy,
             )
             result.save()
-            return HttpResponse('success=%s' % identifier)
+            return HttpResponse('success=%s' % identifier,
+                                mimetype='text/plain')
         else:
             raise Http404
     else:
