@@ -55,6 +55,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'kiosk',
     'south',
     'django.contrib.auth',
     'django.contrib.contenttypes',
