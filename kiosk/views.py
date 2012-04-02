@@ -2,6 +2,7 @@ import hashlib
 from decimal import Decimal
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db.models import Avg, Sum
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -19,7 +20,13 @@ def share(request, identifier):
 
 def totals(request):
     """Returns the kiosk total summary."""
-    return HttpResponse('users=124&average_power=32.14&total_energy=18.56',
+    results = Result.objects.all()
+    totals = results.aggregate(average_power=Avg('average_power'),
+                               total_energy=Sum('energy'))
+    totals['total_energy'] = Decimal(totals['total_energy'])
+    totals['users'] = results.count()
+    return HttpResponse(('users=%(users)s&average_power=%(average_power)s&'
+                         'total_energy=%(total_energy)s') % totals,
                         mimetype='text/plain')
 
 @csrf_exempt
