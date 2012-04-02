@@ -4,3 +4,4 @@ environment.py
 media/*
 static/*
 build/*
+wsgi.py
