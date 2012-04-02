@@ -25,9 +25,8 @@ def totals(request):
                                total_energy=Sum('energy'))
     totals['total_energy'] = Decimal(totals['total_energy'])
     totals['users'] = results.count()
-    return HttpResponse(('users=%(users)s&average_power=%(average_power)s&'
-                         'total_energy=%(total_energy)s') % totals,
-                        mimetype='text/plain')
+    return render_to_response('kiosk/totals.xml', totals,
+                              context_instance=RequestContext(request))
 
 @csrf_exempt
 def upload(request):

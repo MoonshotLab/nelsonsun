@@ -1,0 +1,5 @@
+<result>
+    <users>{{ users }}</users>
+    <average_power>{{ average_power }}</average_power>
+    <total_energy>{{ total_energy }}</total_energy>
+</result>

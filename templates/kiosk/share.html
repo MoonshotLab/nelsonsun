@@ -9,7 +9,7 @@
     <body>
         <div id="container">
             <img id="infographic" src="{{ MEDIA_URL }}{{ result.graphic }}" alt="Nelson Sun Pavilion Infographic">
-            <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}">Share on Facebook</a>
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ url|urlencode }}">Share on Facebook</a>
         </div>
     </body>
 </html>
