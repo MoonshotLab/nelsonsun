@@ -1,9 +1,21 @@
 import hashlib
 from decimal import Decimal
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from kiosk.models import Result
+
+def share(request, identifier):
+    """Displays the user's infographic with share links."""
+    result = get_object_or_404(Result, identifier=identifier)
+    return render_to_response('kiosk/share.html', {
+        'result': result,
+        'url': request.build_absolute_uri(reverse('kiosk_share',
+                                                  args=[identifier])),
+    }, context_instance=RequestContext(request))
 
 def totals(request):
     """Returns the kiosk total summary."""

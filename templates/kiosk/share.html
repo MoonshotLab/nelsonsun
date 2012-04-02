@@ -1,0 +1,15 @@
+<!doctype html>
+
+<html lang="en" class="ideas recent list">
+    <meta charset="utf-8">
+    <title>Share Your Graphic | Nelson Sun Pavilion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reset.css">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css">
+    <body>
+        <div id="container">
+            <img id="infographic" src="{{ MEDIA_URL }}{{ result.graphic }}" alt="Nelson Sun Pavilion Infographic">
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ url }}">Share on Facebook</a>
+        </div>
+    </body>
+</html>

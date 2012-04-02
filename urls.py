@@ -16,6 +16,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+
+    url('^(?P<identifier>\w+)$', 'kiosk.views.share', name='kiosk_share'),
 )
 
 if settings.DEBUG:
