@@ -9,6 +9,13 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from kiosk.models import Result, SolarReading
 
+def home(request):
+    """Display overall Pavilion info."""
+    solar_reading = SolarReading.objects.all()[0]
+    return render_to_response('home.html', {
+        'power': solar_reading.power,
+    }, context_instance=RequestContext(request))
+
 def share(request, identifier):
     """Displays the user's infographic with share links."""
     result = get_object_or_404(Result, identifier=identifier)
