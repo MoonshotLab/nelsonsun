@@ -10,3 +10,12 @@ class Result(models.Model):
 
     def __unicode__(self):
         return self.identifier
+
+
+class SolarReading(models.Model):
+    """A single solar panel power reading at a given time."""
+    power = models.DecimalField(max_digits=6, decimal_places=2)
+    read_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-read_time',)

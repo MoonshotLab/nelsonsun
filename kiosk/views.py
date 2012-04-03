@@ -7,7 +7,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
-from kiosk.models import Result
+from kiosk.models import Result, SolarReading
 
 def share(request, identifier):
     """Displays the user's infographic with share links."""
@@ -52,5 +52,18 @@ def upload(request):
                                 mimetype='text/plain')
         else:
             raise Http404
+    else:
+        raise Http404
+
+@csrf_exempt
+def solar(request):
+    """Saves a solar panel power reading."""
+    if request.method == 'POST':
+        try:
+            solar_reading = SolarReading(power=request.POST.get('power'))
+            solar_reading.save()
+        except:
+            pass
+        return HttpResponse('success=1', mimetype='text/plain')
     else:
         raise Http404
