@@ -13,6 +13,7 @@
             <img id="infographic" src="{{ MEDIA_URL }}{{ result.graphic }}" alt="Nelson Sun Pavilion Infographic">
             <a href="http://www.facebook.com/sharer/sharer.php?u={{ url|urlencode }}">Share on Facebook</a>
             <a href="http://twitter.com/?status=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share on Twitter</a>
+            <a href="mailto:?subject=My Hand Crank Power Generation at the Nelson-Atkins Sun Pavilion&body=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share by Email</a>
         </div>
         <script type="text/javascript">
 
