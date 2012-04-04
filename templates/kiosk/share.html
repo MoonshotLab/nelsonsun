@@ -9,12 +9,21 @@
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/reset.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/base.css">
     <body>
-        <div id="container">
-            <img id="infographic" src="{{ MEDIA_URL }}{{ result.graphic }}" alt="Nelson Sun Pavilion Infographic">
-            <a href="http://www.facebook.com/sharer/sharer.php?u={{ url|urlencode }}">Share on Facebook</a>
-            <a href="http://twitter.com/?status=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share on Twitter</a>
-            <a href="mailto:?subject=My Hand Crank Power Generation at the Nelson-Atkins Sun Pavilion&body=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share by Email</a>
-        </div>
+    <div id="header">
+    	<h1>The <a href="http://www.nelson-atkins.org/art/exhibitions/worldsfairs/sun-pavilion.html">Sun Pavilion</a> at the Nelson-Atkins Museum of Art</h1>
+    </div>
+    
+    <div id="container"><img id="infographic" src="{{ MEDIA_URL }}{{ result.graphic }}" alt="Nelson Sun Pavilion Infographic"></div>
+        <div id="share">
+		<ul>
+			<li class="facebook"><a href="http://www.facebook.com/sharer/sharer.php?u={{ url|urlencode }}">Share on Facebook</a></li>
+			<li class="twitter"><a href="http://twitter.com/?status=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share on Twitter</a></li>
+			<li class="email"><a href="mailto:?subject=My Hand Crank Power Generation at the Nelson-Atkins Sun Pavilion&body=I generated an average of {{ result.average_power|floatformat:"0" }} watts of power cranking the hand crank at the Nelson-Atkins Sun Pavilion. {{ url|urlencode }}">Share by Email</a></li>
+		</ul>
+                <div id="moonshot"><a href="http://moonshot.barkleyus.com/"><img src="{{ STATIC_URL }}graphics/moonshot.png" alt="Created by Moonshot - Barkley Labs"></a></div>
+		
+	</div>
+        
         <script type="text/javascript">
 
           var _gaq = _gaq || [];
