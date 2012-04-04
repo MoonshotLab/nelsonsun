@@ -4,7 +4,35 @@
     <meta charset="utf-8">
     <title>Nelson Sun Pavilion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load('visualization', '1.0', {'packages':['corechart']});
+        google.setOnLoadCallback(drawVisualization);
+        function drawVisualization() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('timeofday', 'x');
+            data.addColumn('number', 'Power');
+
+            {% for solar_reading in solar_readings %}
+            data.addRow([[{{ solar_reading.read_time.hour }}, {{ solar_reading.read_time.minute }}, 0, 0], {{ solar_reading.power }}]);
+            {% endfor %}
+           
+            new google.visualization.LineChart(
+                document.getElementById('visualization')).draw(data, {
+                    curveType: 'function',
+                    legend: {
+                        position: 'none'
+                    },
+                    width: '100%',
+                    height: 500,
+                    vAxis: {
+                        maxValue: 200
+                    }
+                });
+        }
+    </script>
     <body>
-        A single Sun Pavilion solar panel is currently generating <span id="power">{{ power }}</span> watts of power.
+        A single Sun Pavilion solar panel is currently generating <span id="power">{{ current_reading }}</span> watts of power.
+        <div id="visualization"></div>
     </body>
 </html>

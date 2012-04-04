@@ -18,4 +18,4 @@ class SolarReading(models.Model):
     read_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-read_time',)
+        ordering = ('read_time',)

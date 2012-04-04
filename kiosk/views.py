@@ -1,4 +1,4 @@
-import hashlib
+import datetime, hashlib
 from decimal import Decimal
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -11,9 +11,11 @@ from kiosk.models import Result, SolarReading
 
 def home(request):
     """Display overall Pavilion info."""
-    solar_reading = SolarReading.objects.all()[0]
+    solar_readings = SolarReading.objects.filter(
+        read_time__gte=datetime.date.today())[0::15]
     return render_to_response('home.html', {
-        'power': solar_reading.power,
+        'current_reading': solar_readings[-1].power,
+        'solar_readings': solar_readings,
     }, context_instance=RequestContext(request))
 
 def share(request, identifier):
