@@ -25,6 +25,8 @@ def share(request, identifier):
         'result': result,
         'url': request.build_absolute_uri(reverse('kiosk_share',
                                                   args=[identifier])),
+        'graphic': request.build_absolute_uri('%s%s' % (settings.MEDIA_URL,
+                                                    result.graphic)),
     }, context_instance=RequestContext(request))
 
 def totals(request):
