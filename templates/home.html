@@ -1,9 +1,7 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<html lang="en" class="ideas recent list">
-    <meta charset="utf-8">
-    <title>Nelson Sun Pavilion</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
+    <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
         google.load('visualization', '1.0', {'packages':['corechart']});
@@ -19,20 +17,22 @@
            
             new google.visualization.LineChart(
                 document.getElementById('visualization')).draw(data, {
+                    title: "Today's Power Output",
                     curveType: 'function',
                     legend: {
                         position: 'none'
                     },
-                    width: '100%',
                     height: 500,
+                    fontName: 'Helvetica',
                     vAxis: {
                         maxValue: 200
                     }
                 });
         }
     </script>
-    <body>
-        A single Sun Pavilion solar panel is currently generating <span id="power">{{ current_reading }}</span> watts of power.
+    <div id="reading">
+        <p>The current power output of a single Sun Pavilion solar panel is:<p>
+        <p class="power"><span>{{ current_reading }}</span> watts</p>
         <div id="visualization"></div>
-    </body>
-</html>
+    </div>
+{% endblock content %}
