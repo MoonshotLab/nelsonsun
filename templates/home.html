@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block meta %}
+    <title>Nelson-Atkins Sun Pavilion | Solar Panel Power Output</title>
+{% endblock meta %}
+
 {% block content %}
     <link href="http://fonts.googleapis.com/css?family=Oswald" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -32,7 +36,7 @@
     </script>
     <div id="reading">
         <p>The current power output of a single Sun Pavilion solar panel is:<p>
-        <p class="power"><span>{{ current_reading }}</span> watts</p>
+        <p class="power"><span>{{ current_reading|floatformat:"0" }}</span> watts</p>
         <div id="visualization"></div>
     </div>
 {% endblock content %}
