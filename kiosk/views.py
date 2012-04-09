@@ -16,6 +16,8 @@ def home(request):
     return render_to_response('home.html', {
         'current_reading': solar_readings[-1].power,
         'solar_readings': solar_readings,
+        'qr_ref': request.GET.get('ref', None),
+        'qr_action': "Panel Power Output",
     }, context_instance=RequestContext(request))
 
 def share(request, identifier):
@@ -27,6 +29,8 @@ def share(request, identifier):
                                                   args=[identifier])),
         'graphic': request.build_absolute_uri('%s%s' % (settings.MEDIA_URL,
                                                     result.graphic)),
+        'qr_ref': request.GET.get('ref', None),
+        'qr_action': "Share Graphic",
     }, context_instance=RequestContext(request))
 
 def totals(request):
