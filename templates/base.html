@@ -32,9 +32,7 @@
           })();
 
           {% if qr_ref %}
-          window.onload = function() {
-              _trackEvent("QR Code", "{{ qr_action }}");
-          }
+              _gaq.push(['_trackEvent', "QR Code", "{{ qr_action }}"]);
           {% endif %}
 
         </script>
