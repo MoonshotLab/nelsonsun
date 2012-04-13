@@ -12,7 +12,7 @@ from kiosk.models import Result, SolarReading
 def home(request):
     """Display overall Pavilion info."""
     solar_readings = SolarReading.objects.filter(
-        read_time__gte=datetime.date.today())[0::15]
+        read_time__gte=datetime.date.today())[0::2]
     return render_to_response('home.html', {
         'current_reading':
                 SolarReading.objects.latest(field_name='read_time').power,
