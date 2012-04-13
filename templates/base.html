@@ -20,6 +20,10 @@
 	</div>
         
         <script type="text/javascript">
+          function record_outbound_link(link, category, action) {
+            _gat._getTrackerByName()._trackEvent(category, action);
+            setTimeout('document.location = "' + link.href + '"', 100);
+          }
 
           var _gaq = _gaq || [];
           _gaq.push(['_setAccount', 'UA-30495437-1']);
