@@ -1,0 +1,14 @@
+#!/bin/bash
+
+while :
+do
+    if eval "ping -c 1 8.8.8.8"
+    then
+        sleep 10
+    else
+        killall wvdial
+        wvdialconf
+        wvdial &
+        sleep 30
+    fi
+done
