@@ -4,6 +4,7 @@
         <style>
             body {
                 overflow: hidden;
+                font-family: Helvetica, Arial, sans-serif;
             }
 
             .spinner {
@@ -51,11 +52,42 @@
                 background: hsl(0, 0%, 100%);
                 -webkit-border-radius: 400px;
             }
+
+            .spinner .value {
+                position: absolute;
+                bottom: 650px;
+                left: 50%;
+                width: 400px;
+                margin-left: -200px;
+                font-size: 15.0em;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .spinner .label {
+                position: absolute;
+                bottom: 625px;
+                left: 50%;
+                width: 400px;
+                margin-left: -200px;
+                font-size: 4.0em;
+                font-weight: bold;
+                text-align: center;
+                color: hsl(0, 0%, 30%);
+            }
         </style>
     </head>
     <body>
 
-        <div class="spinner"><div class="circle"><div class="half-top"></div><div class="half-bottom"></div><div class="center"></div></div></div>
+        <div class="spinner">
+            <div class="circle">
+                <div class="half-top"></div>
+                <div class="half-bottom"></div>
+                <div class="center"></div>
+            </div>
+            <div class="value"></div>
+            <div class="label">watts</div>
+        </div>
 
         <script src="jquery.min.js"></script>
         <script>
@@ -74,12 +106,13 @@
                 $('.spinner .half-bottom').css({
                     'background': 'hsl(' + this.hue + ', 100%, 50%)',
                 });
+                $('.spinner .value').html(parseInt(this.position));
             }
 
 
             var spinner = new Spinner();
             setInterval(function() {
-                spinner.set_position(Math.abs(Math.random()*180-90+spinner.position)%180);
+                spinner.set_position(Math.abs(Math.random()*60-20+spinner.position)%180);
             }, 300);
         </script>
     </body>
