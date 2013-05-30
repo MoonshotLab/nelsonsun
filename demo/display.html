@@ -3,8 +3,25 @@
         <title>Hand Crank Power</title>
         <style>
             body {
+                background: url('logo.png') no-repeat 50px 30px;
                 overflow: hidden;
                 font-family: Helvetica, Arial, sans-serif;
+            }
+
+            .timer {
+                position: absolute;
+                top: 30px;
+                right: 50px;
+                color: hsl(0, 0%, 60%);
+                font-size: 4.0em;
+                font-weight: bold;
+                text-align: right;
+                line-height: 115px;
+            }
+
+            .timer span {
+                color: hsl(0, 0%, 40%);
+                font-size: 1.3em;
             }
 
             .spinner {
@@ -78,6 +95,8 @@
         </style>
     </head>
     <body>
+
+        <div class="timer"><span>15</span>.000s</div>
 
         <div class="spinner">
             <div class="circle">
