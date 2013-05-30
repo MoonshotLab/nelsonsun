@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Hand Crank Power</title>
+        <style>
+            body {
+                overflow: hidden;
+            }
+
+            .circle {
+                position: absolute;
+                width: 100%;
+                bottom: -600px;
+            }
+
+            .circle-rim {
+                position: relative;
+                width: 800px;
+                height: 800px;
+                background: #ffffff;
+                border-color: hsl(120, 100%, 80%);
+                border-style: solid;
+                border-width: 200px;
+                border-radius: 600px;
+                margin: 0 auto;
+                -webkit-transform: rotate(0);
+                -webkit-transition: -webkit-transform 200ms, border-color 500ms;
+            }
+
+            .circle-mask {
+                position: absolute;
+                top: -200px;
+                left: -200px;
+                width: 1200px;
+                height: 600px;;
+                background: #ffffff;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="circle"><div class="circle-rim"><div class="circle-mask"></div></div></div>
+
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript">
+            var position = 0;
+
+            setInterval(function() {
+                position = Math.abs(Math.random()*180-90+position)%180;
+                var hue = parseInt(120-position*120/180);
+
+                $('.circle-rim').css({
+                    'border-color': 'hsl(' + hue + ', 100%, 50%)',
+                    '-webkit-transform': 'rotate(' + position + 'deg)'
+                });
+            }, 300);
+        </script>
+    </body>
+</html>
