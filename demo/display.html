@@ -12,37 +12,53 @@
                 bottom: -600px;
             }
 
-            .circle-rim {
+            .spinner .circle {
                 position: relative;
-                width: 800px;
-                height: 800px;
-                background: #ffffff;
-                border-color: hsl(120, 100%, 80%);
-                border-style: solid;
-                border-width: 200px;
-                border-radius: 600px;
+                width: 1200px;
+                height: 1200px;
                 margin: 0 auto;
                 -webkit-transform: rotate(0);
-                -webkit-transition: -webkit-transform 200ms, border-color 500ms;
+                -webkit-transition: -webkit-transform 500ms;
             }
 
-            .circle-mask {
+            .spinner .circle .half-top {
                 position: absolute;
-                top: -200px;
-                left: -200px;
+                top: 0;
+                left: 0;
                 width: 1200px;
-                height: 600px;;
-                background: #ffffff;
-                margin: 0 auto;
+                height: 600px;
+                background: hsl(0, 0%, 90%);
+                -webkit-border-radius: 600px 600px 0 0;
+            }
+
+            .spinner .circle .half-bottom {
+                position: absolute;
+                top: 599px;
+                left: 0;
+                width: 1200px;
+                height: 600px;
+                background: hsl(120, 50%, 50%);
+                -webkit-border-radius: 0 0 600px 600px;
+                -webkit-transition: background 500ms;
+            }
+
+            .spinner .circle .center {
+                position: absolute;
+                top: 200px;
+                left: 200px;
+                width: 800px;
+                height: 800px;
+                background: hsl(0, 0%, 100%);
+                -webkit-border-radius: 400px;
             }
         </style>
     </head>
     <body>
 
-        <div class="spinner"><div class="circle-rim"><div class="circle-mask"></div></div></div>
+        <div class="spinner"><div class="circle"><div class="half-top"></div><div class="half-bottom"></div><div class="center"></div></div></div>
 
-        <script type="text/javascript" src="jquery.min.js"></script>
-        <script type="text/javascript">
+        <script src="jquery.min.js"></script>
+        <script>
             function Spinner() {
                 this.position = 0;
                 this.hue = 120;
@@ -52,9 +68,11 @@
                 this.position = position;
                 this.hue = parseInt(120 - this.position * 120 / 180);
 
-                $('.spinner .circle-rim').css({
-                    'border-color': 'hsl(' + this.hue + ', 100%, 50%)',
+                $('.spinner .circle').css({
                     '-webkit-transform': 'rotate(' + this.position + 'deg)'
+                });
+                $('.spinner .half-bottom').css({
+                    'background': 'hsl(' + this.hue + ', 100%, 50%)',
                 });
             }
 
