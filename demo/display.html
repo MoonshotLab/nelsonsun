@@ -43,16 +43,25 @@
 
         <script type="text/javascript" src="jquery.min.js"></script>
         <script type="text/javascript">
-            var position = 0;
+            function Spinner() {
+                this.position = 0;
+                this.hue = 120;
+            }
 
-            setInterval(function() {
-                position = Math.abs(Math.random()*180-90+position)%180;
-                var hue = parseInt(120-position*120/180);
+            Spinner.prototype.set_position = function(position) {
+                this.position = position;
+                this.hue = parseInt(120 - this.position * 120 / 180);
 
                 $('.circle-rim').css({
-                    'border-color': 'hsl(' + hue + ', 100%, 50%)',
-                    '-webkit-transform': 'rotate(' + position + 'deg)'
+                    'border-color': 'hsl(' + this.hue + ', 100%, 50%)',
+                    '-webkit-transform': 'rotate(' + this.position + 'deg)'
                 });
+            }
+
+
+            var spinner = new Spinner();
+            setInterval(function() {
+                spinner.set_position(Math.abs(Math.random()*180-90+spinner.position)%180);
             }, 300);
         </script>
     </body>
