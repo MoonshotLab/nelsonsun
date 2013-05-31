@@ -39,6 +39,17 @@
                 height: 100%;
             }
 
+            .result {
+                display: none;
+                position: absolute;
+                font-size: 18.0em;
+                text-align: center;
+                top: 150px;
+                width: 100%;
+                font-weight: bold;
+                margin: 0 auto;
+            }
+
             .timer {
                 position: absolute;
                 top: 30px;
@@ -148,6 +159,8 @@
             </div>
         </div>
 
+        <div class="result"></div>
+
         <script src="jquery.min.js"></script>
         <script>
             /* The main Application controller
@@ -158,7 +171,9 @@
                 this.current_view = 'start';
                 this.countdown = new Countdown();
                 this.timer = new Timer();
-                this.spinner = new Spinner();
+                this.spinner = new Spinner(this);
+                this.power_values = [];
+                this.average_power = 0;
 
                 // Bind keypresses
                 var obj = this;
@@ -186,10 +201,10 @@
                             $('.cranking').fadeIn();
                             obj.current_view = 'cranking';
                             obj.timer.start();
-                            obj.spinner.active = true;
+                            obj.spinner.enable();
                         }, 4000);
                         setTimeout(function() {
-                            obj.spinner.active = false;
+                            obj.spinner.disable();
                         }, 19000);
                         setTimeout(function() {
                             $('.cranking').fadeOut();
@@ -197,6 +212,8 @@
                         setTimeout(function() {
                             $('.result').fadeIn();
                             obj.current_view = 'result';
+                            obj.average_power = parseInt(obj.power_values.reduce(function(a, b) { return a + b; }, 0) /  obj.power_values.length);
+                            $('.result').html(obj.average_power);
                         }, 22000);
                         break;
                     case 'result':
@@ -273,10 +290,22 @@
             /* The Spinner display controller
             /*******************************/
 
-            function Spinner() {
+            function Spinner(app) {
                 // Initialize
                 this.position = 0;
                 this.hue = 120;
+                this.active = false;
+                this.app = app;
+            }
+
+            Spinner.prototype.enable = function() {
+                // Enable the spinner
+                this.active = true;
+                this.app.power_values = [];
+            }
+
+            Spinner.prototype.disable = function() {
+                // Enable the spinner
                 this.active = false;
             }
 
@@ -284,6 +313,7 @@
                 // Set the position of the spinner
                 if (!this.active) return;
                 this.position = position;
+                this.app.power_values.push(this.position);
                 this.hue = parseInt(120 - this.position * 120 / 180);
 
                 // Transition the css
