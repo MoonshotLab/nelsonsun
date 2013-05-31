@@ -3,9 +3,28 @@
         <title>Hand Crank Power</title>
         <style>
             body {
-                background: url('logo.png') no-repeat 50px 30px;
                 overflow: hidden;
                 font-family: Helvetica, Arial, sans-serif;
+            }
+
+            .start {
+                position: absolute;
+                top: 200px;
+                padding: 0 250px;
+                text-align: center;
+                font-size: 3.0em;
+                color: hsl(0, 0%, 20%);
+            }
+
+            .start p:nth-child(2) {
+                color: hsl(0, 0%, 50%);
+                font-size: 0.7em;
+            }
+
+            .cranking {
+                display: none;
+                background: url('logo.png') no-repeat 50px 30px;
+                height: 100%;
             }
 
             .timer {
@@ -51,7 +70,7 @@
 
             .spinner .circle .half-bottom {
                 position: absolute;
-                top: 599px;
+                top: 600px;
                 left: 0;
                 width: 1200px;
                 height: 600px;
@@ -67,7 +86,7 @@
                 width: 800px;
                 height: 800px;
                 background: hsl(0, 0%, 100%);
-                -webkit-border-radius: 400px;
+                -webkit-border-radius: 399px;
             }
 
             .spinner .value {
@@ -96,42 +115,84 @@
     </head>
     <body>
 
-        <div class="timer"><span>15</span>.000</div>
+        <div class="start">
+            <p>Turn the crank for 15 seconds. The average power you generate will be compared to a solar panel.</p>
+            <p>Press SPACE when ready.</p>
+        </div>
 
-        <div class="spinner">
-            <div class="circle">
-                <div class="half-top"></div>
-                <div class="half-bottom"></div>
-                <div class="center"></div>
+        <div class="cranking">
+            <div class="timer"><span>15</span>.000</div>
+
+            <div class="spinner">
+                <div class="circle">
+                    <div class="half-top"></div>
+                    <div class="half-bottom"></div>
+                    <div class="center"></div>
+                </div>
+                <div class="value"></div>
+                <div class="label">watts</div>
             </div>
-            <div class="value"></div>
-            <div class="label">watts</div>
         </div>
 
         <script src="jquery.min.js"></script>
         <script>
+            /* The main Application controller
+            /********************************/
+
+            function Application() {
+                // Initialize
+                this.current_view = 'start';
+                this.spinner = new Spinner();
+
+                // Bind keypresses
+                var obj = this;
+                $(document).keypress(function(e) {
+                    switch (e.keyCode) {
+                        case 13:
+                        case 32:
+                            obj.next_view();
+                            break;
+                    }
+                });
+            }
+
+            Application.prototype.next_view = function() {
+                // Advance through the application
+                $('.start').hide();
+                $('.cranking').fadeIn();
+            }
+
+
+            /* The Spinner display controller
+            /*******************************/
+
             function Spinner() {
+                // Initialize
                 this.position = 0;
                 this.hue = 120;
             }
 
             Spinner.prototype.set_position = function(position) {
+                // Set the position of the spinner
                 this.position = position;
                 this.hue = parseInt(120 - this.position * 120 / 180);
 
+                // Transition the css
                 $('.spinner .circle').css({
                     '-webkit-transform': 'rotate(' + this.position + 'deg)'
                 });
                 $('.spinner .half-bottom').css({
                     'background': 'hsl(' + this.hue + ', 100%, 50%)',
                 });
+
+                // Display the power value
                 $('.spinner .value').html(parseInt(this.position));
             }
 
 
-            var spinner = new Spinner();
+            app = new Application();
             setInterval(function() {
-                spinner.set_position(Math.abs(Math.random()*60-20+spinner.position)%180);
+                app.spinner.set_position(Math.abs(Math.random()*40-15+app.spinner.position)%180);
             }, 300);
         </script>
     </body>
