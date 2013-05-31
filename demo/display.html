@@ -328,11 +328,34 @@
                 $('.spinner .value').html(parseInt(this.position));
             }
 
+            /* The controller for Dummy users
+            /*******************************/
+
+            function Dummy(app) {
+                // Initialize
+                var obj = this;
+                obj.target = 90;
+                this.app = app;
+                this.interval;
+
+                // Set a new target when not cranking
+                setInterval(function() {
+                    if (this.app.current_view !== 'cranking')
+                        obj.target = Math.random()*100-50+90;
+                }, 100);
+            }
+
+            Dummy.prototype.crank = function() {
+                // Start cranking
+                var obj = this;
+                this.interval = setInterval(function() {
+                    this.app.spinner.set_position(Math.abs(Math.random()*60-30+obj.target)%180);
+                }, 300);
+            }
 
             app = new Application();
-            setInterval(function() {
-                app.spinner.set_position(Math.abs(Math.random()*40-15+app.spinner.position)%180);
-            }, 300);
+            dummy = new Dummy(app);
+            dummy.crank();
         </script>
     </body>
 </html>
