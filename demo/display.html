@@ -21,6 +21,18 @@
                 font-size: 0.7em;
             }
 
+            .countdown {
+                display: none;
+                position: absolute;
+                font-size: 18.0em;
+                text-align: center;
+                top: 150px;
+                width: 100%;
+                color: hsl(0, 70%, 30%);
+                font-weight: bold;
+                margin: 0 auto;
+            }
+
             .cranking {
                 display: none;
                 background: url('logo.png') no-repeat 50px 30px;
@@ -115,6 +127,8 @@
     </head>
     <body>
 
+        <div class="countdown">3</div>
+
         <div class="start">
             <p>Turn the crank for 15 seconds. The average power you generate will be compared to a solar panel.</p>
             <p>Press SPACE when ready.</p>
@@ -142,6 +156,7 @@
             function Application() {
                 // Initialize
                 this.current_view = 'start';
+                this.countdown = new Countdown();
                 this.spinner = new Spinner();
 
                 // Bind keypresses
@@ -158,8 +173,48 @@
 
             Application.prototype.next_view = function() {
                 // Advance through the application
-                $('.start').hide();
-                $('.cranking').fadeIn();
+                switch (this.current_view) {
+                    case 'start':
+                        $('.start').hide();
+                        $('.countdown').fadeIn();
+                        this.countdown.start();
+                        setTimeout(function() {
+                            $('.countdown').hide();
+                            $('.cranking').fadeIn();
+                        }, 4000);
+                        break;
+                }
+            }
+
+            /* The starting countdown controller
+            /**********************************/
+
+            function Countdown() {
+                // Initialize
+                this.countdown_el = $('.countdown');
+            }
+
+            Countdown.prototype.start = function() {
+                // Begin counting down
+                var obj = this;
+
+                setTimeout(function() {
+                    obj.countdown_el.hide();
+                    obj.countdown_el.html('2');
+                    obj.countdown_el.fadeIn();
+                }, 1000);
+
+                setTimeout(function() {
+                    obj.countdown_el.hide();
+                    obj.countdown_el.html('1');
+                    obj.countdown_el.fadeIn();
+                }, 2000);
+
+                setTimeout(function() {
+                    obj.countdown_el.hide();
+                    obj.countdown_el.html('Go.');
+                    obj.countdown_el.fadeIn();
+                }, 3000);
             }
 
 
