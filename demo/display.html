@@ -43,15 +43,15 @@
                 position: absolute;
                 top: 30px;
                 right: 50px;
-                color: hsl(0, 0%, 70%);
+                color: hsl(0, 30%, 70%);
                 font-size: 4.0em;
                 font-weight: bold;
                 text-align: right;
                 line-height: 115px;
             }
 
-            .timer span {
-                color: hsl(0, 0%, 40%);
+            .timer span:nth-child(1) {
+                color: hsl(0, 30%, 40%);
                 font-size: 1.3em;
             }
 
@@ -127,7 +127,7 @@
     </head>
     <body>
 
-        <div class="countdown">3</div>
+        <div class="countdown"></div>
 
         <div class="start">
             <p>Turn the crank for 15 seconds. The average power you generate will be compared to a solar panel.</p>
@@ -135,7 +135,7 @@
         </div>
 
         <div class="cranking">
-            <div class="timer"><span>15</span>.000</div>
+            <div class="timer"><span>15</span>.<span>000</span></div>
 
             <div class="spinner">
                 <div class="circle">
@@ -157,6 +157,7 @@
                 // Initialize
                 this.current_view = 'start';
                 this.countdown = new Countdown();
+                this.timer = new Timer();
                 this.spinner = new Spinner();
 
                 // Bind keypresses
@@ -173,15 +174,34 @@
 
             Application.prototype.next_view = function() {
                 // Advance through the application
-                switch (this.current_view) {
+                var obj = this;
+                switch (obj.current_view) {
                     case 'start':
+                        obj.current_view = 'countdown';
                         $('.start').hide();
                         $('.countdown').fadeIn();
-                        this.countdown.start();
+                        obj.countdown.start();
                         setTimeout(function() {
                             $('.countdown').hide();
                             $('.cranking').fadeIn();
+                            obj.current_view = 'cranking';
+                            obj.timer.start();
+                            obj.spinner.active = true;
                         }, 4000);
+                        setTimeout(function() {
+                            obj.spinner.active = false;
+                        }, 19000);
+                        setTimeout(function() {
+                            $('.cranking').fadeOut();
+                        }, 21000);
+                        setTimeout(function() {
+                            $('.result').fadeIn();
+                            this.current_view = 'result';
+                        }, 22000);
+                        break;
+                    case 'result':
+                        $('.result').hide();
+                        $('.start').fadeIn();
                         break;
                 }
             }
@@ -197,6 +217,7 @@
             Countdown.prototype.start = function() {
                 // Begin counting down
                 var obj = this;
+                obj.countdown_el.html('3');
 
                 setTimeout(function() {
                     obj.countdown_el.hide();
@@ -217,6 +238,36 @@
                 }, 3000);
             }
 
+            /* The cranking Timer controller
+            /******************************/
+
+            function Timer() {
+                // Initialize
+                this.timer_el = $('.cranking .timer');
+                this.start_time = 0;
+                this.interval;
+            }
+
+            Timer.prototype.start = function() {
+                // Begin counting down
+                var obj = this;
+                obj.start_time = new Date().getTime();
+
+                $('span:nth-child(1)', obj.timer_el).html('15');
+                $('span:nth-child(2)', obj.timer_el).html('000');
+
+                obj.interval = setInterval(function() {
+                    var diff = 15000-(new Date().getTime() - obj.start_time);
+                    $('span:nth-child(1)', obj.timer_el).html(parseInt(diff/1000));
+                    $('span:nth-child(2)', obj.timer_el).html(('000' + diff%1000).substr(-3));
+                    if (diff <= 0) {
+                        clearInterval(obj.interval);
+                        $('span:nth-child(1)', obj.timer_el).html('0');
+                        $('span:nth-child(2)', obj.timer_el).html('000');
+                    }
+                }, 100);
+            }
+
 
             /* The Spinner display controller
             /*******************************/
@@ -225,10 +276,12 @@
                 // Initialize
                 this.position = 0;
                 this.hue = 120;
+                this.active = false;
             }
 
             Spinner.prototype.set_position = function(position) {
                 // Set the position of the spinner
+                if (!this.active) return;
                 this.position = position;
                 this.hue = parseInt(120 - this.position * 120 / 180);
 
