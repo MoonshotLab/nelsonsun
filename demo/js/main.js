@@ -48,7 +48,7 @@ Application.prototype.next_view = function() {
                 $('.result').fadeIn();
                 obj.current_view = 'result';
                 obj.average_power = parseInt(obj.power_values.reduce(function(a, b) { return a + b; }, 0) /  obj.power_values.length);
-                $('.result').html(obj.average_power);
+                $('.result .crank-output .watts').html(obj.average_power);
             }, 22000);
             break;
         case 'result':

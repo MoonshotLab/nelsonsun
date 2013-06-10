@@ -40,6 +40,42 @@ body {
     position: absolute;
 }
 
+.result .crank-output {
+    position: absolute;
+    background: #ad3526;
+    border-radius: 20px;
+    width: 420px;
+    height: 320px;
+    top: 0;
+    left: 0;
+}
+
+.result .crank-output h3 {
+    text-align: center;
+    color: #dddd66;
+    text-transform: uppercase;
+    font-weight: normal;
+    border-bottom: #cccccc 1px dotted;
+    padding-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.result .crank-output div {
+    color: #ffffff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.result .crank-output span.watts {
+    font-size: 11.0em;
+    line-height: 1.0em;
+}
+
+.result .crank-output div:nth-child(3) {
+    border-top: #cccccc 1px dotted;
+    padding-top: 20px;
+}
+
 .timer {
     position: absolute;
     top: 30px;
