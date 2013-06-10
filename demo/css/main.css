@@ -1,0 +1,126 @@
+body {
+    overflow: hidden;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.start {
+    position: absolute;
+    top: 200px;
+    padding: 0 250px;
+    text-align: center;
+    font-size: 3.0em;
+    color: hsl(0, 0%, 20%);
+}
+
+.start p:nth-child(2) {
+    color: hsl(0, 0%, 50%);
+    font-size: 0.7em;
+}
+
+.countdown {
+    display: none;
+    position: absolute;
+    font-size: 18.0em;
+    text-align: center;
+    top: 150px;
+    width: 100%;
+    color: hsl(0, 70%, 30%);
+    font-weight: bold;
+    margin: 0 auto;
+}
+
+.cranking {
+    display: none;
+    background: url('logo.png') no-repeat 50px 30px;
+    height: 100%;
+}
+
+.result {
+    display: none;
+    position: absolute;
+}
+
+.timer {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: hsl(0, 30%, 70%);
+    font-size: 4.0em;
+    font-weight: bold;
+    text-align: right;
+    line-height: 115px;
+}
+
+.timer span:nth-child(1) {
+    color: hsl(0, 30%, 40%);
+    font-size: 1.3em;
+}
+
+.spinner {
+    position: absolute;
+    width: 100%;
+    bottom: -600px;
+}
+
+.spinner .circle {
+    position: relative;
+    width: 1200px;
+    height: 1200px;
+    margin: 0 auto;
+    -webkit-transform: rotate(0);
+    -webkit-transition: -webkit-transform 500ms;
+}
+
+.spinner .circle .half-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1200px;
+    height: 600px;
+    background: hsl(0, 0%, 90%);
+    -webkit-border-radius: 600px 600px 0 0;
+}
+
+.spinner .circle .half-bottom {
+    position: absolute;
+    top: 600px;
+    left: 0;
+    width: 1200px;
+    height: 600px;
+    background: hsl(120, 50%, 50%);
+    -webkit-border-radius: 0 0 600px 600px;
+    -webkit-transition: background 500ms;
+}
+
+.spinner .circle .center {
+    position: absolute;
+    top: 200px;
+    left: 200px;
+    width: 800px;
+    height: 800px;
+    background: hsl(0, 0%, 100%);
+    -webkit-border-radius: 399px;
+}
+
+.spinner .value {
+    position: absolute;
+    bottom: 650px;
+    left: 50%;
+    width: 400px;
+    margin-left: -200px;
+    font-size: 15.0em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.spinner .label {
+    position: absolute;
+    bottom: 625px;
+    left: 50%;
+    width: 400px;
+    margin-left: -200px;
+    font-size: 4.0em;
+    font-weight: bold;
+    text-align: center;
+    color: hsl(0, 0%, 30%);
+}
