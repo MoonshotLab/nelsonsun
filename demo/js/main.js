@@ -90,7 +90,7 @@ Application.prototype.calculate_results = function() {
 
     var crank_energy = obj.average_power / 60 / 4;
     var solar_energy = 150 / 60 / 4;
-    var deviation = obj.average_power - 65;
+    var deviation = obj.average_power - 55;
     $('.crank-iphone').html(Math.ceil(crank_energy * 60 / 0.7));
     $('.crank-fridge').html(Math.ceil(380 / obj.average_power));
     $('.crank-roadster').html(Math.ceil(obj.average_power * 2.4 / 17.7));
