@@ -9,6 +9,7 @@ function Application() {
     this.spinner = new Spinner(this);
     this.power_values = [];
     this.average_power = 0;
+    this.power_graph = null;
 
     // Bind keypresses
     var obj = this;
@@ -47,16 +48,45 @@ Application.prototype.next_view = function() {
             setTimeout(function() {
                 $('.result').fadeIn();
                 obj.current_view = 'result';
-                obj.average_power = parseInt(obj.power_values.reduce(function(a, b) { return a + b; }, 0) /  obj.power_values.length);
-                $('.result .crank-output .watts').html(obj.average_power);
+                obj.calculate_results();
             }, 22000);
             break;
         case 'result':
             $('.result').hide();
             $('.start').fadeIn();
+            obj.power_graph.remove();
             obj.current_view = 'start';
             break;
     }
+}
+
+Application.prototype.calculate_results = function() {
+    // Calculate and display final results
+    var obj = this;
+    obj.average_power = parseInt(obj.power_values.reduce(function(a, b) { return a + b; }, 0) /  obj.power_values.length);
+    $('.result .crank-output .watts').html(obj.average_power);
+
+    var data = [];
+    for (i=0; i < obj.power_values.length; i++) {
+        data.push([i, parseInt(obj.power_values[i])]);
+    }
+
+    obj.power_graph = $('<div/>').addClass('power-graph');
+    $('.result').append(obj.power_graph);
+    obj.power_graph.plot([{
+        'data': data,
+        'color': '#ff0000'
+    }], {
+        'xaxis': {
+            'show': false,
+            'min': 0,
+            'max': obj.power_values.length-1
+        },
+        'yaxis': {
+            'min': 0,
+            'max': 180
+        }
+    });
 }
 
 /* The starting countdown controller
@@ -191,24 +221,3 @@ Dummy.prototype.crank = function() {
 app = new Application();
 dummy = new Dummy(app);
 dummy.crank();
-
-var power_vals = [113.30663409549743, 136.3994489889592, 87.29838035069406, 90.0683429185301, 132.1836061682552, 98.52062781341374, 100.61891928315163, 126.09749300405383, 84.83293887693435, 133.92702754121274, 124.80104346293956, 91.25170035753399, 111.0621779365465, 106.50015646591783, 139.45679519325495, 101.70422218739986, 103.33387285936624, 140.4692861950025, 111.02274627890438, 133.40604013763368, 105.60755583457649, 143.39465405326337, 128.7309704720974, 103.14886725507677, 89.57110065035522, 108.340661553666, 87.07589487079531, 92.81369468197227, 140.95127225387841, 87.76948004961014, 110.26647571008652, 108.56794138439, 85.01459334045649, 119.10673609003425, 137.27998850867152, 94.2639915831387, 120.376111343503, 120.84500058088452, 87.05437943339348, 85.51547691691667, 135.74278054758906, 140.36607669200748, 141.26849408261478, 133.59461453277618, 123.57107825577259, 115.16920922324061];
-var data = [];
-for (i=0; i < power_vals.length; i++) {
-    data.push([i, parseInt(power_vals[i])]);
-}
-
-$('.power-graph').plot([{
-    'data': data,
-    'color': '#ff0000'
-}], {
-    'xaxis': {
-        'show': false,
-        'min': 0,
-        'max': power_vals.length-1
-    },
-    'yaxis': {
-        'min': 0,
-        'max': 180
-    }
-});

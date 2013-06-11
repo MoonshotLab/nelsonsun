@@ -82,7 +82,11 @@ body {
     top: 370px;
     left: 75px;
     width: 400px;
-    padding: 0 10px;
+    padding: 20px 10px;
+    background: #eeeeee;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 1.5em;
 }
 
 .result label {
@@ -279,5 +283,5 @@ body {
     color: hsl(0, 0%, 30%);
 }
 
-.result { display: block; }
-.start { display: none; }
+/* .result { display: block; } */
+/* .start { display: none; } */
