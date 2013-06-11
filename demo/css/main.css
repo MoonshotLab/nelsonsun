@@ -73,6 +73,17 @@ body {
 }
 
 .result .crank-output div:nth-child(3) {
+    margin: 0 35px;
+    color: #cccccc;
+}
+
+.result .crank-output strong {
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.result .crank-output div:nth-child(3) {
     border-top: #cccccc 1px dotted;
     padding-top: 20px;
 }
@@ -103,7 +114,7 @@ body {
     padding-left: 40px;
     font-size: 0.9em;
     background: url('../img/icon-sun.png') no-repeat top left;
-    margin: 5px 10px 0;
+    margin: 5px 0 0;
     min-height: 33px;
 }
 
@@ -150,15 +161,17 @@ body {
     padding-right: 20px;
     height: 160px;
     line-height: 160px;
+    text-align: center;
+    width: 160px;
 }
 
 .result .fridge label {
-    width: 420px;
-    margin-top: 20px;
+    width: 400px;
+    margin-top: 35px;
 }
 
 .result .fridge .solar-comparison {
-    width: 380px;
+    width: 360px;
 }
 
 .result .roadster {
@@ -182,12 +195,12 @@ body {
 }
 
 .result .roadster label {
-    width: 340px;
+    width: 320px;
     margin-top: 20px;
 }
 
 .result .roadster .solar-comparison {
-    width: 300px;
+    width: 280px;
 }
 
 .result .power-graph {

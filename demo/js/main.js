@@ -87,6 +87,18 @@ Application.prototype.calculate_results = function() {
             'max': 180
         }
     });
+
+    var crank_energy = obj.average_power / 60 / 4;
+    var solar_energy = 150 / 60 / 4;
+    var deviation = obj.average_power - 65;
+    $('.crank-iphone').html(Math.ceil(crank_energy * 60 / 0.7));
+    $('.crank-fridge').html(Math.ceil(380 / obj.average_power));
+    $('.crank-roadster').html(Math.ceil(obj.average_power * 2.4 / 17.7));
+    $('.solar-iphone').html(Math.ceil(solar_energy * 60 / 0.7));
+    $('.solar-fridge').html(Math.ceil(380 / 150));
+    $('.solar-roadster').html(Math.ceil(150 * 2.4 / 17.7));
+    $('.deviation').html(Math.abs(deviation));
+    $('.more-less').html((Math.abs(deviation)/deviation == -1) ? 'less' : 'more');
 }
 
 /* The starting countdown controller
