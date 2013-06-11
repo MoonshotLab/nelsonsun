@@ -4,6 +4,7 @@ body {
 }
 
 .start {
+    display: none;
     position: absolute;
     top: 200px;
     padding: 0 250px;
@@ -36,7 +37,6 @@ body {
 }
 
 .result {
-    display: none;
     position: absolute;
 }
 
@@ -47,7 +47,7 @@ body {
     width: 420px;
     height: 320px;
     top: 0;
-    left: 0;
+    left: 75px;
 }
 
 .result .crank-output h3 {
@@ -74,6 +74,115 @@ body {
 .result .crank-output div:nth-child(3) {
     border-top: #cccccc 1px dotted;
     padding-top: 20px;
+}
+
+.result .solar-output {
+    position: absolute;
+    top: 340px;
+    left: 75px;
+    width: 400px;
+    padding: 0 10px;
+}
+
+.result label {
+    float: right;
+    display: block;
+    color: #666666;
+    font-size: 1.1em;
+}
+
+.result .solar-comparison {
+    float: right;
+    color: #114950;
+    padding-top: 8px;
+    padding-left: 40px;
+    font-size: 0.9em;
+    background: url('../img/icon-sun.png') no-repeat top left;
+    margin: 5px 10px 0;
+    min-height: 33px;
+}
+
+.result .iphone {
+    position: absolute;
+    top: 0;
+    left: 515px;
+    width: 590px;
+    height: 160px;
+    padding-left: 100px;
+    background-image: url('../img/icon-phone.png');
+    background-repeat: no-repeat;
+    background-position: top left;
+    border-bottom: #666666 1px dotted;
+}
+
+.result .iphone div:nth-child(1) {
+    font-size: 2.0em;
+    color: #114950;
+}
+
+.result .iphone div:nth-child(1) span,
+.result .fridge div:nth-child(1) span,
+.result .roadster div:nth-child(1) span {
+    font-size: 2.0em;
+    font-weight: bold;
+}
+
+.result .fridge {
+    position: absolute;
+    top: 170px;
+    left: 515px;
+    width: 590px;
+    height: 160px;
+    padding-right: 100px;
+    background: url('../img/icon-fridge.png') no-repeat top right;
+    border-bottom: #666666 1px dotted;
+}
+
+.result .fridge div:nth-child(1) {
+    float: left;
+    font-size: 2.0em;
+    color: #114950;
+    padding-right: 20px;
+    height: 160px;
+    line-height: 160px;
+}
+
+.result .fridge label {
+    width: 420px;
+    margin-top: 20px;
+}
+
+.result .fridge .solar-comparison {
+    width: 380px;
+}
+
+.result .roadster {
+    position: absolute;
+    top: 340px;
+    left: 515px;
+    width: 500px;
+    height: 150px;
+    padding-left: 200px;
+    background: url('../img/icon-car.png') no-repeat center left;
+    border-bottom: #666666 1px dotted;
+}
+
+.result .roadster div:nth-child(1) {
+    float: left;
+    font-size: 2.0em;
+    color: #114950;
+    padding-right: 20px;
+    height: 120px;
+    margin-top: 30px;
+}
+
+.result .roadster label {
+    width: 340px;
+    margin-top: 20px;
+}
+
+.result .roadster .solar-comparison {
+    width: 300px;
 }
 
 .timer {
