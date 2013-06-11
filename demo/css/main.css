@@ -186,6 +186,15 @@ body {
     width: 300px;
 }
 
+.result .power-graph {
+    position: absolute;
+    width: 1140px;
+    height: 200px;
+    top: 500px;
+    left: 70;
+    border: 1px solid blue;
+}
+
 .timer {
     position: absolute;
     top: 30px;
@@ -270,3 +279,6 @@ body {
     text-align: center;
     color: hsl(0, 0%, 30%);
 }
+
+.result { display: block; }
+.start { display: none; }
