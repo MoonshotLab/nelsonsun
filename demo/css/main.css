@@ -46,7 +46,7 @@ body {
     border-radius: 20px;
     width: 420px;
     height: 320px;
-    top: 0;
+    top: 30px;
     left: 75px;
 }
 
@@ -79,7 +79,7 @@ body {
 
 .result .solar-output {
     position: absolute;
-    top: 340px;
+    top: 370px;
     left: 75px;
     width: 400px;
     padding: 0 10px;
@@ -105,7 +105,7 @@ body {
 
 .result .iphone {
     position: absolute;
-    top: 0;
+    top: 30px;
     left: 515px;
     width: 590px;
     height: 160px;
@@ -130,7 +130,7 @@ body {
 
 .result .fridge {
     position: absolute;
-    top: 170px;
+    top: 200px;
     left: 515px;
     width: 590px;
     height: 160px;
@@ -159,7 +159,7 @@ body {
 
 .result .roadster {
     position: absolute;
-    top: 340px;
+    top: 370px;
     left: 515px;
     width: 500px;
     height: 150px;
@@ -190,7 +190,7 @@ body {
     position: absolute;
     width: 1140px;
     height: 200px;
-    top: 500px;
+    top: 530px;
     left: 70;
     border: 1px solid blue;
 }
